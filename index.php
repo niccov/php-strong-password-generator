@@ -1,21 +1,7 @@
 <?php
 
+include __DIR__ . '/partials/functions.php';
 
-
-
-function generatePassword($passwordLength) {
-
-    $permitted_chars  =  '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ£!&%?#' ;
-
-    $input_length = strlen($permitted_chars);
-    $random_string = '';
-    for($i = 0; $i < $passwordLength; $i++) {
-        $random_character = $permitted_chars[mt_rand(0, $input_length - 1)];
-        $random_string .= $random_character;
-    }
-
-    return $random_string;
-}
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +16,15 @@ function generatePassword($passwordLength) {
     <div>
        
         <form action="index.php" method="GET">
-            <input type="number"  min="0" max="10" name="passwordLength">
+            <input type="number"  min="0" max="20" name="passwordLength">
             <input type="submit" >
         </form>
 
-        <?php echo generatePassword($_GET['passwordLength']) ?>
+        <?php
+        if (isset($_GET['passwordLength'])) {
+            echo generatePassword($_GET['passwordLength']);
+        }
+         ?>
     </div>
 </body>
 </html>
